@@ -1,0 +1,440 @@
+/* Feldspar — a repo-style file browser for local Obsidian vaults. */
+
+.feldspar-view {
+  --vm-indent: 20px;
+  --vm-row-height: 32px;
+  --vm-chevron: 18px;
+  --vm-row-padding: 8px;
+  --vm-guide: var(--nav-indentation-guide-color, var(--background-modifier-border));
+  --vm-guide-width: var(--nav-indentation-guide-width, 1px);
+  --vm-row-hover: var(--nav-item-background-hover, var(--background-modifier-hover));
+  --vm-border: var(--background-modifier-border);
+  --vm-radius: var(--radius-m, 8px);
+  --vm-icon: var(--text-muted);
+
+  padding: 1rem 1.25rem 2.5rem;
+}
+
+/* ------------------------------------------------------------- header */
+
+.feldspar-header {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  margin-bottom: 0.9rem;
+}
+
+.feldspar-heading {
+  align-items: center;
+  display: flex;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.feldspar-heading-icon {
+  align-items: center;
+  color: var(--vm-icon);
+  display: inline-flex;
+}
+
+.feldspar-heading-icon svg {
+  height: 20px;
+  width: 20px;
+}
+
+.feldspar-title {
+  font-size: var(--h3-size, 1.3em);
+  font-weight: var(--h3-weight, 600);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.feldspar-toolbar {
+  align-items: center;
+  display: flex;
+  gap: 0.15rem;
+}
+
+.feldspar-icon-button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-s, 4px);
+  box-shadow: none;
+  color: var(--vm-icon);
+  cursor: var(--cursor, pointer);
+  display: inline-flex;
+  height: 28px;
+  justify-content: center;
+  padding: 0;
+  width: 28px;
+}
+
+.feldspar-icon-button:hover,
+.feldspar-icon-button:focus-visible {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+.feldspar-icon-button svg {
+  height: 16px;
+  width: 16px;
+}
+
+/* -------------------------------------------------------------- panel */
+
+.feldspar-panel {
+  background: var(--background-primary);
+  border: 1px solid var(--vm-border);
+  border-radius: var(--vm-radius);
+  overflow: hidden;
+}
+
+.feldspar-panel-bar {
+  align-items: center;
+  background: var(--background-secondary);
+  border-bottom: 1px solid var(--vm-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  justify-content: space-between;
+  min-height: 44px;
+  padding: 0.4rem 0.6rem 0.4rem 0.85rem;
+}
+
+.feldspar-stats {
+  align-items: center;
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: var(--font-ui-small);
+  gap: 0.2rem 1.1rem;
+}
+
+.feldspar-stat {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.feldspar-stat-icon {
+  align-items: center;
+  color: var(--vm-icon);
+  display: inline-flex;
+}
+
+.feldspar-stat-icon svg {
+  height: 14px;
+  width: 14px;
+}
+
+.feldspar-stat-count {
+  color: var(--text-normal);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.feldspar-stat-link,
+.feldspar-stat-link:hover {
+  color: var(--text-accent);
+  text-decoration: none;
+}
+
+.feldspar-search {
+  align-items: center;
+  display: flex;
+  flex: 0 1 220px;
+  min-width: 140px;
+  position: relative;
+}
+
+.feldspar-search-icon {
+  align-items: center;
+  color: var(--text-faint);
+  display: inline-flex;
+  left: 8px;
+  pointer-events: none;
+  position: absolute;
+}
+
+.feldspar-search-icon svg {
+  height: 14px;
+  width: 14px;
+}
+
+.feldspar-view input.feldspar-search-input {
+  background: var(--background-primary);
+  border: 1px solid var(--vm-border);
+  border-radius: var(--radius-s, 4px);
+  font-size: var(--font-ui-small);
+  height: 28px;
+  padding: 0 0.6rem 0 1.8rem;
+  width: 100%;
+}
+
+.feldspar-view input.feldspar-search-input:focus {
+  border-color: var(--background-modifier-border-focus, var(--interactive-accent));
+  box-shadow: 0 0 0 2px var(--background-modifier-border-focus, transparent);
+}
+
+/* --------------------------------------------------------------- tree */
+
+.feldspar-tree {
+  font-size: var(--nav-item-size, var(--font-ui-small));
+  padding: 0.25rem 0;
+}
+
+.feldspar-node.is-collapsed > .feldspar-children {
+  display: none;
+}
+
+.feldspar-row {
+  align-items: center;
+  border-radius: 0;
+  color: var(--nav-item-color, var(--text-normal));
+  display: flex;
+  gap: 0.4rem;
+  min-height: var(--vm-row-height);
+  padding-left: calc(var(--vm-row-padding) + var(--vm-depth, 0) * var(--vm-indent));
+  padding-right: 0.6rem;
+  position: relative;
+  user-select: none;
+}
+
+.feldspar-row:hover,
+.feldspar-row:focus-within {
+  background: var(--vm-row-hover);
+  color: var(--nav-item-color-hover, var(--text-normal));
+}
+
+.feldspar-row:focus {
+  outline: none;
+}
+
+.feldspar-row:focus-visible {
+  box-shadow: inset 2px 0 0 var(--interactive-accent);
+}
+
+/* Indentation guides: one hairline under every ancestor's chevron. */
+.feldspar-row::before {
+  background: repeating-linear-gradient(
+    to right,
+    var(--vm-guide) 0,
+    var(--vm-guide) var(--vm-guide-width),
+    transparent var(--vm-guide-width),
+    transparent var(--vm-indent)
+  );
+  bottom: 0;
+  content: "";
+  left: calc(var(--vm-row-padding) + var(--vm-chevron) / 2);
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: calc(var(--vm-depth, 0) * var(--vm-indent));
+}
+
+.feldspar-chevron {
+  align-items: center;
+  color: var(--nav-collapse-icon-color, var(--text-faint));
+  cursor: var(--cursor, pointer);
+  display: inline-flex;
+  flex: 0 0 var(--vm-chevron);
+  height: var(--vm-chevron);
+  justify-content: center;
+  transition: transform 120ms ease;
+  width: var(--vm-chevron);
+}
+
+.feldspar-chevron svg {
+  height: 14px;
+  width: 14px;
+}
+
+.feldspar-node:not(.is-collapsed) > .feldspar-row > .feldspar-chevron {
+  transform: rotate(90deg);
+}
+
+.feldspar-row:hover > .feldspar-chevron {
+  color: var(--nav-collapse-icon-color-collapsed, var(--text-muted));
+}
+
+.feldspar-icon {
+  align-items: center;
+  color: var(--vm-icon);
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.feldspar-icon svg {
+  height: 16px;
+  width: 16px;
+}
+
+.feldspar-node.is-vault > .feldspar-row > .feldspar-icon {
+  color: var(--text-accent);
+}
+
+.feldspar-label {
+  align-items: baseline;
+  display: inline-flex;
+  flex: 1 1 auto;
+  gap: 0.3rem;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.feldspar-segment {
+  color: var(--text-muted);
+}
+
+.feldspar-segment.is-last {
+  color: inherit;
+}
+
+.feldspar-node.is-vault > .feldspar-row .feldspar-segment.is-last {
+  font-weight: var(--nav-item-weight-hover, 600);
+}
+
+.feldspar-separator {
+  color: var(--text-faint);
+}
+
+.feldspar-count {
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------------- vault rows */
+
+.feldspar-badges {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.3rem;
+}
+
+.feldspar-badge {
+  border: 1px solid var(--vm-border);
+  border-radius: 999px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  padding: 0 0.5rem;
+  white-space: nowrap;
+}
+
+.feldspar-badge.is-current {
+  background: color-mix(in srgb, var(--interactive-accent) 16%, transparent);
+  border-color: color-mix(in srgb, var(--interactive-accent) 45%, transparent);
+  color: var(--text-accent);
+}
+
+.feldspar-actions {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.25rem;
+  margin-left: 0.25rem;
+}
+
+.feldspar-reveal {
+  opacity: 0;
+  transition: opacity 100ms ease;
+}
+
+.feldspar-row:hover .feldspar-reveal,
+.feldspar-row:focus-within .feldspar-reveal {
+  opacity: 1;
+}
+
+.feldspar-view button.feldspar-open {
+  background: var(--interactive-normal);
+  border: 1px solid var(--vm-border);
+  border-radius: var(--radius-s, 4px);
+  box-shadow: none;
+  color: var(--text-normal);
+  cursor: var(--cursor, pointer);
+  font-size: var(--font-ui-smaller);
+  font-weight: 600;
+  height: 24px;
+  line-height: 1;
+  padding: 0 0.6rem;
+}
+
+.feldspar-view button.feldspar-open:hover,
+.feldspar-view button.feldspar-open:focus-visible {
+  background: var(--interactive-accent);
+  border-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+}
+
+/* ------------------------------------------------------------- states */
+
+.feldspar-state {
+  align-items: center;
+  color: var(--text-muted);
+  display: flex;
+  font-size: var(--font-ui-small);
+  gap: 0.5rem;
+  padding: 1.2rem 0.9rem;
+}
+
+.feldspar-state.is-error {
+  color: var(--text-error);
+}
+
+.feldspar-state-icon {
+  align-items: center;
+  display: inline-flex;
+}
+
+.feldspar-state-icon svg {
+  height: 16px;
+  width: 16px;
+}
+
+.feldspar-state-icon.is-spinning svg {
+  animation: feldspar-spin 1.1s linear infinite;
+}
+
+@keyframes feldspar-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.feldspar-empty {
+  align-items: center;
+  border: 1px dashed var(--vm-border);
+  border-radius: var(--vm-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  max-width: 34rem;
+  padding: 2.2rem 1.5rem;
+  text-align: center;
+}
+
+.feldspar-empty-icon {
+  color: var(--text-faint);
+}
+
+.feldspar-empty-icon svg {
+  height: 32px;
+  width: 32px;
+}
+
+.feldspar-empty h3 {
+  margin: 0.2rem 0 0;
+}
+
+.feldspar-empty p {
+  color: var(--text-muted);
+  margin: 0 0 0.6rem;
+}

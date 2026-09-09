@@ -1,0 +1,25 @@
+{
+  "name": "feldspar",
+  "version": "0.1.0",
+  "description": "A local-first filesystem map for discovering and opening Obsidian vaults.",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs --watch",
+    "build": "node esbuild.config.mjs",
+    "check": "tsc --noEmit"
+  },
+  "keywords": [
+    "obsidian",
+    "vault",
+    "filesystem",
+    "local-first"
+  ],
+  "author": "cdiak",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "esbuild": "0.25.2",
+    "obsidian": "latest",
+    "typescript": "5.5.4"
+  }
+}

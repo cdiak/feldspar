@@ -1,0 +1,10 @@
+{
+  "id": "feldspar",
+  "name": "Feldspar",
+  "version": "0.1.0",
+  "minAppVersion": "1.5.0",
+  "description": "Discover Obsidian vaults in selected folders and open them from a local filesystem map.",
+  "author": "cdiak",
+  "authorUrl": "https://github.com/cdiak",
+  "isDesktopOnly": true
+}
