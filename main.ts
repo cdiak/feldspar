@@ -31,12 +31,12 @@ export default class FeldsparPlugin extends Plugin {
     this.addRibbonIcon("map", "Open Feldspar", () => void this.activateView());
     this.addCommand({
       id: "open-feldspar",
-      name: "Open Feldspar",
+      name: "Open vault map",
       callback: () => void this.activateView(),
     });
     this.addCommand({
       id: "refresh-feldspar",
-      name: "Refresh Feldspar",
+      name: "Refresh vault map",
       callback: () => void this.refreshOpenViews(),
     });
     this.addSettingTab(new FeldsparSettingTab(this.app, this));
@@ -44,10 +44,6 @@ export default class FeldsparPlugin extends Plugin {
     if (this.settings.openOnStartup) {
       this.app.workspace.onLayoutReady(() => void this.activateView());
     }
-  }
-
-  async onunload(): Promise<void> {
-    this.app.workspace.detachLeavesOfType(FELDSPAR_VIEW_TYPE);
   }
 
   async getVaults(): Promise<DiscoveredVault[]> {

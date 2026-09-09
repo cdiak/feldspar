@@ -3,7 +3,7 @@
   "name": "Feldspar",
   "version": "0.1.0",
   "minAppVersion": "1.5.0",
-  "description": "Discover Obsidian vaults in selected folders and open them from a local filesystem map.",
+  "description": "Map every vault on this computer as a repo-style file tree and open any of them in one click.",
   "author": "cdiak",
   "authorUrl": "https://github.com/cdiak",
   "isDesktopOnly": true
